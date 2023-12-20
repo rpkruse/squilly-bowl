@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Game } from '../../../models/game';
 import { Round } from '../../../models/round';
 import { StorageService } from '../../../services/storage.service';
-import { Constants, ROUND_TYPE, SessionStorageKeys } from '../../../shared/constants';
+import { Constants, ROUND_TYPE, SessionStorageKeys, URL_ROUTES } from '../../../shared/constants';
 import { EndgameStats, EndgameTableStats, RoundScoreStats } from '../../../models/endgame-stats';
 import { CommonModule } from '@angular/common';
 import { Player } from '../../../models/player';
 import { Team } from '../../../models/team';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-end-game',
@@ -22,7 +23,7 @@ export class EndGameComponent implements OnInit {
   endGameStats!: EndgameStats;
   tableStats: EndgameTableStats[] = [];
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
     const gameFromStorage: Game | null = this.storageService.getValue<Game>(SessionStorageKeys.GAME);
@@ -34,11 +35,11 @@ export class EndGameComponent implements OnInit {
     this.game = gameFromStorage;
     this.rounds = roundsFromStorage;
 
-    console.log(this.game);
-    console.log(this.rounds);
-
     this.generateTableStats();
-    this.generateEndgameStats();
+  }
+
+  playAgain(): void {
+    this.router.navigate([`${URL_ROUTES.CREATE}`]); 
   }
 
   getRoundData(stat: EndgameTableStats, index: number): RoundScoreStats {
@@ -59,7 +60,6 @@ export class EndGameComponent implements OnInit {
 
       stats.push(pStat);
     }
-
 
     // Loop through each players stats:
     stats.forEach((playerStat: EndgameTableStats) => {
@@ -131,9 +131,48 @@ export class EndGameComponent implements OnInit {
     this.tableStats = stats;
   }
 
+  private getWorstTeam(): Team | null {
+    const round: Round = this.rounds[this.rounds.length - 1];
+    const teams2D: any = round.teams;
 
-  private generateEndgameStats(): void {
+    if (!teams2D) return null;
+      
 
+    const teams: Team[] = JSON.parse(JSON.stringify([].concat(...teams2D))); // de-ref the array so we can reset scores
+
+    // sort from worst to best
+    teams.sort((t1: Team, t2: Team) => (t1.score > t2.score ? 1 : -1));
+
+    return teams[0];
+  }
+
+  private getWorstPlayer(): Player | null {
+    const round: Round = this.rounds[this.rounds.length - 1];
+    const players2D: any = round.players;
+
+    if (!players2D) return null;
+      
+
+    const players: Player[] = JSON.parse(JSON.stringify([].concat(...players2D))); // de-ref the array so we can reset scores
+
+    // sort from worst to best
+    players.sort((p1: Player, p2: Player) => (p1.score > p2.score ? 1 : -1));
+
+    return players[0];
+  }
+
+  get squillyBowlChamp(): string {
+    if (!this.game || !this.rounds) return '';
+
+    if (this.game.hasTeams || this.game.usb) {
+      const worstTeam = this.getWorstTeam();
+
+      return `${worstTeam?.firstPlayer.name}/${worstTeam?.secondPlayer.name}`;
+    }
+
+    const worstPlayer = this.getWorstPlayer();
+
+    return `${worstPlayer?.name}`;
   }
 
   get roundNames(): string[] {
