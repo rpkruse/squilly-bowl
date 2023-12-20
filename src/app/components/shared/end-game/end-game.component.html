@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col" *ngFor="let rn of roundNames">{{ rn }}</th>
+          <th scope="col">Total Score</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (stat of tableStats; track stat.name; let i = $index) {
+          <tr>
+            <th scope="row">{{ stat.name }}</th>
+            @for (roundStat of stat.roundScore; track roundStat.score; let i = $index) {
+              <td>
+                {{ roundStat.score || '-' }}<span *ngIf="roundStat.secondScore">/{{ roundStat.secondScore}}</span>
+              </td>
+            }
+            <td>{{ stat.totalScore }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- 
+<div class="row row-cols-3">
+  <div class="col">moo</div>
+</div> -->

@@ -1,0 +1,55 @@
+<div class="container mt-5 overflow-auto">
+  <!-- Single Round, Winners, Losers -->
+  <div *ngIf="currentRound <= 2">
+    <app-single-round
+      [round]="rounds[currentRound]"
+      [roundIndex]="currentRound"
+      [roundTitle]="roundTitle"
+      (moveToNextRound)="moveToNextRound()"
+    >
+    </app-single-round>
+  </div>
+
+
+
+
+  <!-- Teams or end -->
+  <div *ngIf="currentRound == 3">
+    <div *ngIf="game.hasTeams">
+      <app-team-round
+        [round]="rounds[currentRound]"
+        [roundIndex]="currentRound"
+        [roundTitle]="roundTitle"
+        (moveToNextRound)="moveToNextRound()"
+      >
+      </app-team-round>
+    </div>
+
+    <div *ngIf="!game.hasTeams">
+      <app-end-game></app-end-game>
+    </div>
+
+  </div>
+
+  <div *ngIf="currentRound == 4">
+    <div *ngIf="game.usb">
+      <app-team-round
+        [round]="rounds[currentRound]"
+        [roundIndex]="currentRound"
+        [roundTitle]="roundTitle"
+        (moveToNextRound)="moveToNextRound()"
+      >
+      </app-team-round>
+    </div>
+
+    <div *ngIf="!game.usb">
+      <app-end-game></app-end-game>
+    </div>
+  </div>
+
+  <div *ngIf="currentRound > 4">
+    <div>
+      <app-end-game></app-end-game>
+    </div>
+  </div>
+</div>

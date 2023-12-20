@@ -1,0 +1,27 @@
+<!-- Team round card -->
+<div class="row">
+  <div class="col-6">
+    <app-stats [roundInfo]="roundInfo"></app-stats>
+  </div>
+
+  <div class="col-6">
+    <div class="card h-100">
+      <h5 class="card-header text-center">{{ roundTitle }},  Game {{ currentGameIndex + 1 }}/{{ round.teams.length}}</h5>
+      <div class="card-body">
+        <h5 class="card-title text-left">The current teams are:</h5>
+        <div *ngFor="let team of nextSetOfTeams">
+          <div class="input-group">
+            <div class="input-group-prepend w-50">
+              <span class="fw-bold input-group-text w-100">{{ team.firstPlayer.name }}/{{ team.secondPlayer.name }}'s Score:</span>
+            </div>
+            <input type="number" class="form-control" [(ngModel)]="team.score" (change)="saveRoundDataToStorage()"/>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary" (click)="backClicked()" [disabled]="backDisabled">Back</button>
+        <button type="button" class="btn btn-primary float-end" (click)="nextClicked()" [disabled]="nextDisabled">{{ continueButtonText }}</button>
+      </div>
+    </div>
+  </div>
+</div>

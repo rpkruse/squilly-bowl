@@ -1,0 +1,57 @@
+<div class="container mt-5 overflow-auto" *ngIf="game">
+  <div class="row">
+    <!-- Game setting card -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <h5 class="card-header text-center">Game Settings</h5>
+        <div class="card-body">
+          <h5 class="card-title text-center">Adjust the settings to your game:</h5>
+
+          <div class="form-check form-switch text-left">
+            <label class="form-check-label" for="teamsSwitch">Team Games</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="teamsSwitch" [(ngModel)]="game.hasTeams" (change)="saveGameToStorage()"/>
+          </div>
+
+          <div class="form-check form-switch text-left">
+            <label class="form-check-label" for="usbSwitch">Ultimate SquillyBowl</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="usbSwitch" [(ngModel)]="game.usb" (change)="saveGameToStorage()"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player setting card -->
+    <div class="col-md-6 mt-5 mt-md-0">
+      <div class="card h-100">
+        <h5 class="card-header text-center">Player Settings</h5>
+        <div class="card-body">
+          <h5 class="card-title text-center">Add or remove players from your game:</h5>
+          <div class="input-group mb-1">
+            <input type="text" class="form-control" (keydown.enter)="addNewPlayer()" [(ngModel)]="newPlayerName"/>
+            <button class="btn btn-primary" type="button" (click)="addNewPlayer()" [disabled]="!addNewPlayerEnabled">Add Player</button>
+          </div>
+          <div class="list-group list-group-flush playerList">
+            <div class="list-group-item d-flex justify-content-between" *ngFor="let player of players">
+              <span class="fw-bold mt-auto mb-auto" *ngIf="!player.isEditMode">{{ player.name }}</span>
+              <div class="input-group" *ngIf="player.isEditMode">
+                <input type="text" class="form-control" [(ngModel)]="player.name"/>
+              </div>
+              <span>
+                <button type="button" class="btn btn-outline-primary" *ngIf="!player.isEditMode" (click)="editPlayerClicked(player)"><i class="bi bi-gear-fill"></i></button>
+                <button type="button" class="btn btn-outline-primary" *ngIf="player.isEditMode" (click)="savePlayerEditClicked(player)"><i class="bi bi-save"></i></button>
+                <button type="button" class="btn btn-outline-danger" *ngIf="!player.isEditMode" (click)="deletePlayer(player)"><i class="bi bi-trash3"></i></button>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12 text-center d-grid">
+      <button type="button" class="btn btn-success" [disabled]="!startEnabled" (click)="startGame()">Start!</button>
+    </div>
+  </div>
+</div>
