@@ -28,8 +28,6 @@ export class HomeComponent {
       finalProduct.push(letter);
     });
 
-    console.log(finalProduct);
-
     return finalProduct;
   }
 }

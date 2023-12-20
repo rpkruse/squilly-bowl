@@ -102,13 +102,11 @@ export class EndGameComponent implements OnInit {
           }
 
           if (allPlayerOccurs.length > 1) {
-            // console.log(`${playerStat.name} has more than one`);
             secondScore = allPlayerOccurs[1].score;
           }
 
           // don't add dupe stats
           if (playerStat.roundScore.some(x => x.roundType === round.type)) {
-            console.log(`${playerStat.name} alreay has a score for ${round.type}`);
             continue;
           }
 
