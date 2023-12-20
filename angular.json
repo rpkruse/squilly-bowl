@@ -97,14 +97,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "baseHref": "/squilly-bowl/",
-            "name": "",
-            "email": ""
-          }
         }
       }
     }
