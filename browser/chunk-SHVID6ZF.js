@@ -1,0 +1,1 @@
+import{Ma as r,Na as a,Ua as i,Z as o,ab as p}from"./chunk-SO7XCAGI.js";var s=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["app-rules"]],standalone:!0,features:[p],decls:2,vars:0,template:function(n,l){n&1&&(r(0,"p"),i(1,"rules works!"),a())}});let t=e;return t})();var d=[{path:"",component:s}];export{d as default};
