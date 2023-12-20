@@ -2,11 +2,11 @@
   <div class="row mb-5">
     <div class="col-12">
       <img class="rounded d-inline" src="./assets/Squilly_right.gif" alt="image">
-      <h2 class="d-inline text-success wavy align-middle">
+      <h5 class="d-inline text-success wavy align-middle">
         @for (letter of textSpans; track letter; let i = $index) {
           <span [style]="getSpanStyle(i)" [innerHTML]="letter"></span>
         }
-      </h2>
+      </h5>
       <img class="rounded d-inline" src="./assets/Squilly_left.gif" alt="image">
     </div>
   </div>
