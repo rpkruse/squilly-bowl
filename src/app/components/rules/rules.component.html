@@ -1,1 +1,16 @@
-<p>rules works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 text-center text-success">
+      <h1>Squilly Bowl Rules:</h1>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <ol>
+        @for (rule of rules; track rule) {
+          <li [innerHTML]="rule"></li>
+        }
+      </ol>
+    </div>
+  </div>
+</div>
