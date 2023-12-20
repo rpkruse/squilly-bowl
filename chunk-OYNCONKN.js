@@ -1,4 +1,4 @@
-import{Ga as o,Ka as h,La as p,Ma as c,Na as l,Oa as i,Pa as d,Va as w,Z as n,bb as m,qa as s,xa as r}from"./chunk-XYVOFFDO.js";function g(t,e){if(t&1&&d(0,"li",5),t&2){let f=e.$implicit;o("innerHTML",f,s)}}var u=(()=>{let e=class e{get rules(){return["<p>Each player will compete individually marking down their scores at the end of the round.<p>",`<p>After each player has completed their individual round, two brackets are generated based on the individual's score:</p>
+import{Ga as o,La as h,Ma as p,Na as c,Oa as l,Pa as i,Qa as d,Wa as w,Z as n,cb as m,qa as s,xa as r}from"./chunk-XWLULYOL.js";function g(t,e){if(t&1&&d(0,"li",5),t&2){let f=e.$implicit;o("innerHTML",f,s)}}var u=(()=>{let e=class e{get rules(){return["<p>Each player will compete individually marking down their scores at the end of the round.<p>",`<p>After each player has completed their individual round, two brackets are generated based on the individual's score:</p>
       <p>
         <ul>
           <li>The first bracket contains the upper half of players (aka the winners)</li>
